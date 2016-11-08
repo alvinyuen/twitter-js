@@ -2,8 +2,12 @@ const _ = require('lodash');
 
 let data = [];
 
+let tweetId = 0;
+
 function add (name, content) {
-  data.push({ name: name, content: content });
+  tweetId++;
+  let idStr = tweetId.toString();
+  data.push({ name: name, content: content, tweetId: idStr });
 }
 
 function list () {

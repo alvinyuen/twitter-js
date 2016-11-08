@@ -16,7 +16,15 @@
 
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.content}}</li>
+        <li>
+          <div>
+            <a href="/users/{{ tweet.name }}">{{tweet.name}}</a>
+          </div>
+          <div>
+            <a href="/tweets/{{tweet.tweetId}}">{{tweet.content}}</a>
+          </div>
+          <a href="https://www.google.com">Re-Tweet</a>
+        </li>
       {% endfor %}
 
     </div>
