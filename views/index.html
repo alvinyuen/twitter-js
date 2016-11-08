@@ -12,7 +12,26 @@
       <b>Your Name</b><br>
       100 followers
     </div>
-    <div class="col-md-9">
+
+        {% if showForm %}
+    <form action="/tweets" method="POST">
+      <label for="name_field">Name:</label>
+
+      <!-- distinguish user input repopulation -->
+      {% if showUserName %}
+      <input name="name" value='{{tweets[0].name}}' type="text" id="name_field" />
+      {% else %}
+      <input name="name" type="text" id="name_field" />
+      {% endif %}
+
+      <label for="text_field">Text:</label>
+      <input name="text" type="text" id="text_field" style="width: 350px;" />
+
+      <input type="submit" value="Submit" />
+  </form>
+      {% endif %}
+
+    <div id="tweet_list" class="col-md-9">
 
       <!-- display tweets here -->
       {% for tweet in tweets %}
@@ -26,6 +45,9 @@
           <a href="https://www.google.com">Re-Tweet</a>
         </li>
       {% endfor %}
+
+
+
 
     </div>
   </div>

@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const routes = require('./routes');
 const path = require('path');
+const bodyParser = require('body-parser');
+const socketio = require('socket.io');
 
 const app = express();
 
@@ -11,13 +13,30 @@ const PORT = 3000;
 //template engine
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
-nunjucks.configure('views', { noCache: true });
+nunjucks.configure('views', {
+	noCache: true
+});
+
+
+//listening PORT
+let server = app.listen(PORT, function() {
+	console.log(`listening to ${PORT}!!`);
+});
+
+//have socketio listen to server
+let io = socketio.listen(server);
+
+
 
 //middleware
 app.use(morgan('dev'));
 
+//url-encoded & JSON parsing middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 //routing middleware
-app.use('/', routes);
+app.use('/', routes(io));
 
 //static files routes
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -38,7 +57,6 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 
 
-
 // app.get('/', function(req, res, next){
 // 	let renderObj = {title: 'the Title', people: [{name: 'Hermione'}, {name: 'Gandolf'}, {name: 'Hodor'}]};
 // 	res.render('index.html', renderObj, function(err, html) {
@@ -54,7 +72,3 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 
 
-//listening PORT
-app.listen(PORT, function(){
-	console.log(`listening to ${PORT}!!`);
-});
