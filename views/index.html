@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-3">
       <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
-      <b>Your Name</b><br>
+      <b> {{tweets[0].name}}</b><br>
       100 followers
     </div>
 
@@ -40,7 +40,7 @@
             <a href="/users/{{ tweet.name }}">{{tweet.name}}</a>
           </div>
           <div>
-            <a href="/tweets/{{tweet.tweetId}}">{{tweet.content}}</a>
+            <a href="/tweets/{{tweet.id}}">{{tweet.content}}</a>
           </div>
           <a href="https://www.google.com">Re-Tweet</a>
         </li>
