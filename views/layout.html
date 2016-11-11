@@ -92,10 +92,12 @@
       console.log(tweet);     
 
     // some logic to add the new tweet to the DOM…
-    var tweetListTag = document.getElementById("tweet_list");
+    var tweetList = $('#tweet_list');
+    console.log('tweetlist',tweetList);
+    tweetList.prepend('<li><a href="/users/"'+ tweet.name+'>'+tweet.name+' - </a><a href="/tweets/"'+tweet.id+'>'+tweet.text+'</a><div><a href="https://www.google.com">Re-Tweet</a></div></li>');
 
 
-    }); 
+    });
     </script>
     </body>
 
